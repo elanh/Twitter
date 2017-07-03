@@ -15,8 +15,8 @@ import KeychainAccess
 class APIManager: SessionManager {
     
     // MARK: TODO: Add App Keys
-    static let consumerKey = "YOUR_KEY_HERE"
-    static let consumerSecret = "YOUR_SECRET_HERE"
+    static let consumerKey = "qaR428cD0JNwHUi1P9vHwSInk"
+    static let consumerSecret = "WOgudWfcLbOqUh53R37gLbrblzkCtqcTVJTBafwahEOp1ksdGu"
     
     static let requestTokenURL = "https://api.twitter.com/oauth/request_token"
     static let authorizeURL = "https://api.twitter.com/oauth/authorize"
@@ -79,6 +79,7 @@ class APIManager: SessionManager {
         
     func getHomeTimeLine(completion: @escaping ([Tweet]?, Error?) -> ()) {
 
+        
         // This uses tweets from disk to avoid hitting rate limit. Comment out if you want fresh
         // tweets,
         if let data = UserDefaults.standard.object(forKey: "hometimeline_tweets") as? Data {
@@ -116,6 +117,7 @@ class APIManager: SessionManager {
                 completion(tweets, nil)
         }
     }
+    
     
     // MARK: TODO: Favorite a Tweet
     
