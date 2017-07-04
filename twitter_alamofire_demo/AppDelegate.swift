@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let homeTimeLineViewController = storyboard.instantiateViewController(withIdentifier: "TimelineViewController")
+            let homeTimeLineViewController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
             window?.rootViewController = homeTimeLineViewController
         }
         
