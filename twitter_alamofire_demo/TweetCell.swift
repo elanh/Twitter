@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Alamofire
+import AlamofireImage
+
 
 class TweetCell: UITableViewCell {
 
@@ -31,18 +32,24 @@ class TweetCell: UITableViewCell {
     
     var tweet: Tweet! {
         didSet {
+            
+            profilePictureImageView.layer.cornerRadius = 25
+            profilePictureImageView.clipsToBounds = true
+            
             tweetTextLabel.text = tweet.text
             usernameLabel.text = tweet.user.screenName
             nameLabel.text = tweet.user.name
             timestampLabel.text = tweet.createdAtString
             
-            let numLikes = String(describing: tweet.favoriteCount)
+            let numLikes = String(describing: tweet.favoriteCount!)
+
             let numRetweet = String(describing: tweet.retweetCount)
             
             numLikesLabel.text = numLikes
             numRetweetLabel.text = numRetweet
             
-            profilePictureImageView.image.af_setImage(withURL: tweet.user.profileImageUrl)
+            print(tweet.user.profileImageUrl)
+            profilePictureImageView.af_setImage(withURL: tweet.user.profileImageUrl)
         }
     }
     
