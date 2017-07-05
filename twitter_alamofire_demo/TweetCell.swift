@@ -54,6 +54,20 @@ class TweetCell: UITableViewCell {
             numRetweetLabel.text = numRetweet
             
             profilePictureImageView.af_setImage(withURL: tweet.user.profileImageUrl)
+            
+            if tweet.favorited! {
+                likeButton.isSelected = true
+            } else {
+                likeButton.isSelected = false
+            }
+            
+            if tweet.retweeted {
+                retweetButton.isSelected = true
+            } else {
+                retweetButton.isSelected = false
+            }
+            
+            
         }
     }
     
