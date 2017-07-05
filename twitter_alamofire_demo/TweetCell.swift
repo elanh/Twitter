@@ -27,8 +27,13 @@ class TweetCell: UITableViewCell {
     
     @IBOutlet weak var numRetweetLabel: UILabel!
     
- 
+    @IBOutlet weak var messageButton: UIButton!
     
+    @IBOutlet weak var likeButton: UIButton!
+    
+    @IBOutlet weak var retweetButton: UIButton!
+    
+    @IBOutlet weak var commentButton: UIButton!
     
     var tweet: Tweet! {
         didSet {
@@ -41,14 +46,13 @@ class TweetCell: UITableViewCell {
             nameLabel.text = tweet.user.name
             timestampLabel.text = tweet.createdAtString
             
-            let numLikes = String(describing: tweet.favoriteCount!)
+            let numLikes = String(describing: tweet.favoriteCount)
 
             let numRetweet = String(describing: tweet.retweetCount)
             
             numLikesLabel.text = numLikes
             numRetweetLabel.text = numRetweet
             
-            print(tweet.user.profileImageUrl)
             profilePictureImageView.af_setImage(withURL: tweet.user.profileImageUrl)
         }
     }

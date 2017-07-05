@@ -51,7 +51,11 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         
         cell.tweet = tweets[indexPath.row]
-        
+        cell.likeButton.tag = indexPath.row
+        cell.retweetButton.tag = indexPath.row
+        cell.messageButton.tag = indexPath.row
+        cell.commentButton.tag = indexPath.row
+        //TODO: do this for all buttons in the cell
         return cell
     }
     
@@ -65,14 +69,65 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    @IBAction func didTapLogout(_ sender: Any) {
-        APIManager.shared.logout()
-    }
-    
     func refreshControlAction(_ refreshControl: UIRefreshControl) {
         refresh()
         refreshControl.endRefreshing()
     }
+    
+    @IBAction func didTapLogout(_ sender: Any) {
+        APIManager.shared.logout()
+    }
+    
+    //IS this the correct way to check if we are liking or dislking? Or is the done automatically?
+    @IBAction func onLikeButton(_ sender: Any) {
+        let favoriteButton = sender as! UIButton
+        let cellRow = favoriteButton.tag
+        let tweet = tweets[cellRow]
+
+        if tweet.favorited! {
+            tweet.favorited = false
+            favoriteButton.isSelected = false
+            tweet.favoriteCount -= 1
+            APIManager.shared.unfavoriteTweet(tweet: tweet) { (tweet, error) in
+                self.refresh()
+            }
+        } else {
+            tweet.favorited = true
+            favoriteButton.isSelected = true
+            tweet.favoriteCount += 1
+            APIManager.shared.favoriteTweet(tweet) { (tweet,error) in
+                self.refresh()
+            }
+        }
+
+    }
+    
+    @IBAction func onRetweetButton(_ sender: Any) {
+        let retweetButton = sender as! UIButton
+        let cellRow = retweetButton.tag
+        let tweet = tweets[cellRow]
+        
+        if tweet.retweeted {
+            tweet.retweeted = false
+            retweetButton.isSelected = false
+            tweet.retweetCount -= 1
+            APIManager.shared.unRetweet(tweet: tweet) { (tweet,error) in
+                self.refresh()
+            }
+        } else {
+            tweet.retweeted = true
+            retweetButton.isSelected = true
+            tweet.retweetCount += 1
+            APIManager.shared.retweet(tweet: tweet) { (tweet,error) in
+                self.refresh()
+            }
+        }
+    }
+    
+    
+    
+    
+    
     
     /*
      // MARK: - Navigation

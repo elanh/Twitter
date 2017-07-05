@@ -105,7 +105,7 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtt-e4-7tD">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtt-e4-7tD" userLabel="Comment Button">
                                                     <rect key="frame" x="66" y="54" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="uce-go-jww"/>
@@ -113,7 +113,7 @@
                                                     </constraints>
                                                     <state key="normal" title="Button" image="reply-icon"/>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xU-KA-wDF">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xU-KA-wDF" userLabel="Message Button">
                                                     <rect key="frame" x="291" y="54" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="BeF-Er-7hu"/>
@@ -121,13 +121,16 @@
                                                     </constraints>
                                                     <state key="normal" image="message-icon"/>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTh-Va-h0L">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTh-Va-h0L" userLabel="Retweet Button">
                                                     <rect key="frame" x="141" y="54" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="zps-x7-fTp"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="retweet-icon"/>
                                                     <state key="selected" image="retweet-icon-green"/>
+                                                    <connections>
+                                                        <action selector="onRetweetButton:" destination="5YO-Vh-39k" eventType="touchUpInside" id="4GJ-vj-TK9"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Timestamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8k-0O-TTB">
                                                     <rect key="frame" x="266" y="9" width="58.5" height="13.5"/>
@@ -141,13 +144,16 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iAc-CK-sA1">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iAc-CK-sA1" userLabel="Like Button">
                                                     <rect key="frame" x="216" y="54" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="Lww-AZ-fy8"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="favor-icon"/>
                                                     <state key="selected" image="favor-icon-red"/>
+                                                    <connections>
+                                                        <action selector="onLikeButton:" destination="5YO-Vh-39k" eventType="touchUpInside" id="kdZ-VN-FHA"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kox-5L-9mG">
                                                     <rect key="frame" x="171" y="63" width="12.5" height="13.5"/>
@@ -192,10 +198,14 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="commentButton" destination="xtt-e4-7tD" id="jA4-PS-4m6"/>
+                                            <outlet property="likeButton" destination="iAc-CK-sA1" id="4v3-ta-FYZ"/>
+                                            <outlet property="messageButton" destination="3xU-KA-wDF" id="cSh-Xd-2az"/>
                                             <outlet property="nameLabel" destination="CYd-ej-yqt" id="fir-Yk-HbB"/>
                                             <outlet property="numLikesLabel" destination="oqL-Hy-rYi" id="uTd-lD-9Cw"/>
                                             <outlet property="numRetweetLabel" destination="kox-5L-9mG" id="noc-Go-kCs"/>
                                             <outlet property="profilePictureImageView" destination="HHr-1Y-WIS" id="sjf-HD-1lq"/>
+                                            <outlet property="retweetButton" destination="xTh-Va-h0L" id="gUf-HI-hfq"/>
                                             <outlet property="timestampLabel" destination="h8k-0O-TTB" id="G0d-zW-5nK"/>
                                             <outlet property="tweetTextLabel" destination="mD1-v3-0M4" id="QYx-hH-Ccz"/>
                                             <outlet property="usernameLabel" destination="djO-ef-Q3T" id="1eS-O0-LSU"/>
