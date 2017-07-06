@@ -178,7 +178,34 @@ class APIManager: SessionManager {
         }
     }
     
-    // MARK: TODO: Get User Timeline
+    func getUserTimeline(_ user: User, completion: @escaping ([Tweet]?, Error?) -> ()) {
+        let urlString = "https://api.twitter.com/1.1/statuses/user_timeline.json"
+        let parameters = ["screen_name": user.screenName]
+        request(urlString, method: .get, parameters: parameters, encoding: URLEncoding.queryString)
+            .validate()
+            .responseJSON { (response) in
+                guard response.result.isSuccess else {
+                    completion(nil, response.result.error)
+                    return
+                }
+                guard let tweetDictionaries = response.result.value as? [[String: Any]] else {
+                    print("Failed to parse tweets")
+                    let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "Failed to parse tweets"])
+                    completion(nil, error)
+                    return
+                }
+                
+                let data = NSKeyedArchiver.archivedData(withRootObject: tweetDictionaries)
+                UserDefaults.standard.set(data, forKey: "user_timeline")
+                UserDefaults.standard.synchronize()
+                
+                let tweets = tweetDictionaries.flatMap({ (dictionary) -> Tweet in
+                    Tweet(dictionary: dictionary)
+                })
+                completion(tweets, nil)
+        }
+
+    }
     
     
     //--------------------------------------------------------------------------------//

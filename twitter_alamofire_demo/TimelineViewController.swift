@@ -132,10 +132,6 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         print("Sucessfully tweeted")
     }
     
-
-    
-    
-    
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

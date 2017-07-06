@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    var tabBarController: UITabBarController!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -25,8 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let homeTimeLineViewController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
-            window?.rootViewController = homeTimeLineViewController
+            tabBarController = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+            window?.rootViewController = tabBarController
+            
+            //let homeTimeLineViewController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+           // window?.rootViewController = homeTimeLineViewController
         }
         
         return true

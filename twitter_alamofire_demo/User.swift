@@ -12,7 +12,12 @@ class User {
     
     var name: String
     var screenName: String
+    var bio: String?
     var profileImageUrl: URL
+    var backgroundImageUrl: URL?
+    var followersCount: Int
+    var friendsCount: Int
+    
     var dictionary: [String: Any]?
     
     private static var _current: User?
@@ -44,6 +49,15 @@ class User {
         self.dictionary = dictionary
         name = dictionary["name"] as! String
         screenName = dictionary["screen_name"] as! String
+        bio = dictionary["descripion"] as? String
         profileImageUrl = URL(string: (dictionary["profile_image_url_https"] as! String))!
+//        let backgroundImageString = dictionary["profile_background_image_url_https"] as! String
+//        if(backgroundImageString != nil) {
+//            backgroundImageUrl = URL(fileURLWithPath: backgroundImageString)
+//        }
+//        
+        followersCount = dictionary["followers_count"] as! Int
+        friendsCount = dictionary["friends_count"] as! Int
     }
 }
+
