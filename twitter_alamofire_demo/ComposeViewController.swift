@@ -20,8 +20,7 @@ class ComposeViewController: UIViewController {
     @IBOutlet weak var tweetTextView: RSKPlaceholderTextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        //self.tweetTextView.placeholder = "What's happening?"
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,6 +41,10 @@ class ComposeViewController: UIViewController {
     }
 
     
+    @IBAction func onCancelButton(_ sender: Any) {
+        self.dismiss(animated: true) {
+        }
+    }
     
     
     

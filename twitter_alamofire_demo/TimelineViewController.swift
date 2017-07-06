@@ -14,6 +14,9 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var tableView: UITableView!
     
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -130,10 +133,27 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
 
+    
+    
+    
+    
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let navigationController = segue.destination as! UINavigationController
-        let composeViewController = navigationController.childViewControllers[0] as!  ComposeViewController
-        composeViewController.delegate = self
+        
+        if(segue.identifier == "composeSegue") {
+            let navigationController = segue.destination as! UINavigationController
+            let composeViewController = navigationController.childViewControllers[0] as!  ComposeViewController
+            composeViewController.delegate = self
+        } else if(segue.identifier == "detailSegue") {
+            let cell = sender as! TweetCell
+            if let indexPath = tableView.indexPath(for: cell) {
+                let tweet = tweets[indexPath.row]
+                let detailController = segue.destination as! DetailViewController
+                detailController.tweet = tweet
+            }
+            
+            
+        }
+
      }
 
     
