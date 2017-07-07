@@ -236,6 +236,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Ctl-bI-Eag" id="igH-cX-XMH"/>
+                        <segue destination="sSj-fz-06y" kind="show" identifier="profileSegue" id="NfD-kW-05u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZlF-i2-Ves" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -694,7 +695,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SaT-rV-qzu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="860" y="1577.3613193403301"/>
+            <point key="canvasLocation" x="860" y="1705"/>
         </scene>
         <!--Profile-->
         <scene sceneID="A4j-as-4CF">
@@ -731,6 +732,7 @@
         <image name="retweet-icon-green" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Sdi-hc-Sw4"/>
+        <segue reference="NfD-kW-05u"/>
+        <segue reference="G2X-iW-tQr"/>
     </inferredMetricsTieBreakers>
 </document>

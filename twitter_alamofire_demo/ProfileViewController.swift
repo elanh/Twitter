@@ -39,7 +39,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tweetsTableView.dataSource = self
         tweetsTableView.delegate = self
         
-        user = User.current
+        if(user == nil) {
+            user = User.current
+        }
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
@@ -64,7 +66,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         profilePictureImageView.af_setImage(withURL:user.profileImageUrl)
         if let url = user.backgroundImageUrl {
-            print(url)
             coverPhotoImageView.af_setImage(withURL: url)
         }
         

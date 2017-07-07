@@ -8,15 +8,13 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate {
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate, TweetCellDelegate {
     
     var tweets: [Tweet] = []
     
     @IBOutlet weak var tableView: UITableView!
     
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,7 +56,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         cell.retweetButton.tag = indexPath.row
         cell.messageButton.tag = indexPath.row
         cell.commentButton.tag = indexPath.row
-        //TODO: do this for all buttons in the cell
+        cell.delegate = self
         return cell
     }
     
@@ -132,9 +130,12 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         print("Sucessfully tweeted")
     }
     
+    func tweetCell(_ tweetCell: TweetCell, didTap user: User) {
+        performSegue(withIdentifier: "profileSegue", sender: user)
+    }
+    
     
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if(segue.identifier == "composeSegue") {
             let navigationController = segue.destination as! UINavigationController
             let composeViewController = navigationController.childViewControllers[0] as!  ComposeViewController
@@ -146,11 +147,12 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
                 let detailController = segue.destination as! DetailViewController
                 detailController.tweet = tweet
             }
-            
-            
+        } else if(segue.identifier == "profileSegue") {
+            let profileViewController = segue.destination as! ProfileViewController
+            let user = sender as! User
+            profileViewController.user = user
         }
 
      }
 
-    
 }
