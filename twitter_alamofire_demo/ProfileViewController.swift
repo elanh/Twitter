@@ -41,21 +41,33 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         user = User.current
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        
+        tweetsTableView.insertSubview(refreshControl, at: 0)
+        
+        refresh()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        refresh()
+        
         nameLabel.text = user.name
         screennameLabel.text = user.screenName
         bioLabel.text = user.bio
-        numFollowingLabel.text = String(user.friendsCount)
-        numFollowersLabel.text = String(user.followersCount)
+        numFollowingLabel.text = String(user.friendsCount) + " Following"
+        numFollowersLabel.text = String(user.followersCount) + " Followers"
         
         
         profilePictureImageView.layer.cornerRadius = 25
         profilePictureImageView.clipsToBounds = true
         
         profilePictureImageView.af_setImage(withURL:user.profileImageUrl)
+        if let url = user.backgroundImageUrl {
+            print(url)
+            coverPhotoImageView.af_setImage(withURL: url)
+        }
         
-//        coverPhotoImageView.af_setImage(withURL: (user.backgroundImageUrl)!)
-        
-        refresh()
     }
     
     func refresh() {
@@ -67,6 +79,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 print("Error getting home timeline: " + error.localizedDescription)
             }
         }
+    }
+    
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        refresh()
+        refreshControl.endRefreshing()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -134,16 +151,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
 
     }
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     func did(post: Tweet) {

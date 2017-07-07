@@ -49,15 +49,20 @@ class User {
         self.dictionary = dictionary
         name = dictionary["name"] as! String
         screenName = dictionary["screen_name"] as! String
-        bio = dictionary["descripion"] as? String
+        bio = dictionary["description"] as? String
         profileImageUrl = URL(string: (dictionary["profile_image_url_https"] as! String))!
-//        let backgroundImageString = dictionary["profile_background_image_url_https"] as! String
-//        if(backgroundImageString != nil) {
-//            backgroundImageUrl = URL(fileURLWithPath: backgroundImageString)
-//        }
-//        
+        if let backgroundURLString = dictionary["profile_banner_url"] as? String {
+             backgroundImageUrl = URL(string: backgroundURLString)
+        }
+
         followersCount = dictionary["followers_count"] as! Int
         friendsCount = dictionary["friends_count"] as! Int
+    }
+    
+    class func refreshCurrentInstance() {
+        APIManager.shared.getCurrentAccount { (user: User?, error:Error?) in
+            User.current = user
+        }
     }
 }
 
