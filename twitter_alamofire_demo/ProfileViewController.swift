@@ -26,6 +26,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var numFollowersLabel: UILabel!
     
+    @IBOutlet weak var editButton: UIButton!
+    
+    
     var tweets: [Tweet] = []
     var user: User!
 
@@ -38,10 +41,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         tweetsTableView.dataSource = self
         tweetsTableView.delegate = self
-        
-        if(user == nil) {
-            user = User.current
-        }
+        //print(user)
+        showEditButton()
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
@@ -53,6 +54,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidAppear(_ animated: Bool) {
         refresh()
+        
+        showEditButton()
+        
         
         nameLabel.text = user.name
         screennameLabel.text = user.screenName
@@ -69,6 +73,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             coverPhotoImageView.af_setImage(withURL: url)
         }
         
+    }
+    
+    func showEditButton() {
+        if(user == nil) {
+            user = User.current
+            
+            editButton.layer.cornerRadius = 5
+            editButton.layer.borderWidth = 1
+            editButton.layer.borderColor = UIColor.blue.cgColor
+            
+        } else {
+            editButton.isHidden = true
+        }
     }
     
     func refresh() {
