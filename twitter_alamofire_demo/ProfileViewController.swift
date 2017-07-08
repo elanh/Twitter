@@ -41,7 +41,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         tweetsTableView.dataSource = self
         tweetsTableView.delegate = self
-        //print(user)
         showEditButton()
         
         let refreshControl = UIRefreshControl()
@@ -54,8 +53,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidAppear(_ animated: Bool) {
         refresh()
-        
         showEditButton()
+        
         
         
         nameLabel.text = user.name
@@ -76,13 +75,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func showEditButton() {
-        if(user == nil) {
+        if(user == nil || user.screenName == User.current?.screenName) {
             user = User.current
-            
             editButton.layer.cornerRadius = 5
             editButton.layer.borderWidth = 1
             editButton.layer.borderColor = UIColor.blue.cgColor
-            
         } else {
             editButton.isHidden = true
         }
